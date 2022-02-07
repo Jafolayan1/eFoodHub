@@ -1,7 +1,13 @@
+using eFoodHub.Services.Configuration;
+using eFoodHub.UI.Configuration;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.ConfigureDependenciesServices();
+builder.Services.ConfigureRepositoryServices(builder.Configuration);
+
 
 var app = builder.Build();
 

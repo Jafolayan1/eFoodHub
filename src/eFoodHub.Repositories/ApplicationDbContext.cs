@@ -7,6 +7,17 @@ namespace eFoodHub.Repositories
 {
     public class ApplicationDbContext : IdentityDbContext<User, Role, int>
     {
+        //Needed if any migration
+        public ApplicationDbContext()
+        {
+
+        }
+
+        //Configuration from AppSettings
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+        {
+
+        }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Item> Items { get; set; }
         public DbSet<ItemType> ItemTypes { get; set; }
@@ -19,6 +30,7 @@ namespace eFoodHub.Repositories
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            //Needed for migration purpose only
             if (!optionsBuilder.IsConfigured)
             {
                 //optionsBuilder.UseSqlServer(@"data source=Shailendra\SqlExpress; initial catalog=ePizzaHubSite;integrated security=True;");

@@ -7,27 +7,64 @@ namespace eFoodHub.Services.Implementations
 {
     public class AuthenticationService : IAuthenticationService
     {
-        protected SignInManager<User> signInManager;
-        protected UserManager<User> userManager;
+        protected SignInManager<User> _signInManager;
+        protected UserManager<User> _userManager;
+        protected RoleManager<User> _roleManager;
+
+        public AuthenticationService(SignInManager<User> signInManager, UserManager<User> userManager, RoleManager<User> roleManager)
+        {
+            _signInManager = signInManager;
+            _userManager = userManager;
+            _roleManager = roleManager;
+        }
 
         public User AuthenticateUser(string UserName, string Password)
         {
-            throw new NotImplementedException();
+            var result = _signInManager.PasswordSignInAsync(UserName, Password, false, lockoutOnFailure: false).Result;
+
+            if (result.Succeeded)
+            {
+                var user = _userManager.FindByNameAsync(UserName).Result;
+                var roles = _userManager.GetRolesAsync(user).Result;
+                user.Roles = roles.ToArray();
+
+                return user;
+            }
+            return null;
         }
 
         public bool CreateUser(User User, string Password)
         {
-            throw new NotImplementedException();
+            var result = _userManager.CreateAsync(User, Password).Result;
+            if (result.Succeeded)
+            {
+                //Admin, User
+                string role = "Admin";
+                var res = _userManager.AddToRoleAsync(User, role).Result;
+                if (res.Succeeded)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public User GetUser(string UserName)
         {
-            throw new NotImplementedException();
+            return _userManager.FindByNameAsync(UserName).Result;
         }
 
-        public Task<bool> SignOut()
+        public async Task<bool> SignOut()
         {
-            throw new NotImplementedException();
+            try
+            {
+                await _signInManager.SignOutAsync();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }
