@@ -13,4 +13,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\eFoodHub.Repositories\eFoodHub.Repositories.csproj" />
+  </ItemGroup>
+
 </Project>
