@@ -1,6 +1,6 @@
 ﻿namespace eFoodHub.Entities
 {
-    public class Payment
+    public class PaymentDetails
     {
         public int Id { get; set; }
         public string TransactionId { get; set; }
