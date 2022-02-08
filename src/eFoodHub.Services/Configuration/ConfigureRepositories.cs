@@ -1,5 +1,4 @@
-﻿
-using eFoodHub.Entities;
+﻿using eFoodHub.Entities;
 using eFoodHub.Repositories;
 
 using Microsoft.AspNetCore.Identity;
@@ -18,7 +17,7 @@ namespace eFoodHub.Services.Configuration
     {
         public static void ConfigureRepositoryServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContextPool<ApplicationDbContext>((options) =>
+            services.AddDbContext<ApplicationDbContext>((options) =>
             {
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
             });

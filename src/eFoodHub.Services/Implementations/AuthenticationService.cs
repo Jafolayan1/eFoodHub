@@ -9,9 +9,9 @@ namespace eFoodHub.Services.Implementations
     {
         protected SignInManager<User> _signInManager;
         protected UserManager<User> _userManager;
-        protected RoleManager<User> _roleManager;
+        protected RoleManager<Role> _roleManager;
 
-        public AuthenticationService(SignInManager<User> signInManager, UserManager<User> userManager, RoleManager<User> roleManager)
+        public AuthenticationService(SignInManager<User> signInManager, UserManager<User> userManager, RoleManager<Role> roleManager)
         {
             _signInManager = signInManager;
             _userManager = userManager;
