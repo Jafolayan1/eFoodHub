@@ -66,6 +66,15 @@ namespace eFoodHub.UI.Controllers
             return View();
         }
 
+        public async Task<IActionResult> LogOut()
+        {
+            await _authService.SignOut();
+            return RedirectToAction("LogOutComplete");
+        }
 
+        public IActionResult LogOutComplete()
+        {
+            return View();
+        }
     }
 }
