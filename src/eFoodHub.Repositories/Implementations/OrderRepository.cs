@@ -7,7 +7,7 @@ namespace eFoodHub.Repositories.Implementations
 {
     public class OrderRepository : Repository<Order>, IOrderRepository
     {
-        protected ApplicationDbContext _context
+        protected ApplicationDbContext Context
         {
             get
             {
@@ -21,7 +21,7 @@ namespace eFoodHub.Repositories.Implementations
 
         public IEnumerable<Order> GetUserOrders(int UderId)
         {
-            return _context.Orders.Include(o => o.OrderItems).Where(u => u.UserId == UderId).ToList();
+            return Context.Orders.Include(o => o.OrderItems).Where(u => u.UserId == UderId).ToList();
         }
     }
 }

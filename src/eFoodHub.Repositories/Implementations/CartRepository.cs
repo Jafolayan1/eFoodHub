@@ -7,7 +7,7 @@ namespace eFoodHub.Repositories.Implementations
 {
     public class CartRepository : Repository<Cart>, ICartRepository
     {
-        private ApplicationDbContext _context
+        protected ApplicationDbContext Context
         {
             get
             {
@@ -21,17 +21,17 @@ namespace eFoodHub.Repositories.Implementations
 
         public Cart GetCart(Guid CartId)
         {
-            return _context.Carts.Include("Items").Where(c => c.Id == CartId && c.IsActive == true).FirstOrDefault();
+            return Context.Carts.Include("Items").Where(c => c.Id == CartId && c.IsActive == true).FirstOrDefault();
         }
 
         public int DeleteItem(Guid CartId, int ItemId)
         {
-            var item = _context.CartItems.Where(ci => ci.CartId == CartId && ci.Id == ItemId).FirstOrDefault();
+            var item = Context.CartItems.Where(ci => ci.CartId == CartId && ci.Id == ItemId).FirstOrDefault();
 
             if (item != null)
             {
-                _context.CartItems.Remove(item);
-                return _context.SaveChanges();
+                Context.CartItems.Remove(item);
+                return Context.SaveChanges();
             }
             else
             {
@@ -59,7 +59,7 @@ namespace eFoodHub.Repositories.Implementations
                     }
                 }
                 if (flag)
-                    return _context.SaveChanges();
+                    return Context.SaveChanges();
             }
             return 0;
         }
@@ -68,7 +68,7 @@ namespace eFoodHub.Repositories.Implementations
         {
             Cart cart = GetCart(CartId);
             cart.UserId = UserId;
-            return _context.SaveChanges();
+            return Context.SaveChanges();
         }
     }
 }

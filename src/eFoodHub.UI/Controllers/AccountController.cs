@@ -8,7 +8,7 @@ namespace eFoodHub.UI.Controllers
 {
     public class AccountController : Controller
     {
-        IAuthenticationService _authService;
+        readonly IAuthenticationService _authService;
         public AccountController(IAuthenticationService authService)
         {
             _authService = authService;
@@ -53,7 +53,14 @@ namespace eFoodHub.UI.Controllers
                 var user = _authService.AuthenticateUser(model.Email, model.Password);
                 if (user != null)
                 {
-
+                    if (user.Roles.Contains("Admin"))
+                    {
+                        return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
+                    }
+                    else if (user.Roles.Contains("User"))
+                    {
+                        return RedirectToAction("Index", "Dashboard", new { area = "User" });
+                    }
                 }
             }
             return View();
