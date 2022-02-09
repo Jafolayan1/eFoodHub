@@ -1,13 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-namespace eFoodHub.UI.Areas.Admin.Controllers
+﻿namespace eFoodHub.UI.Areas.Admin.Controllers
 {
-    [Area("Admin")]
-    public class DashboardController : Controller
+    public class DashboardController : BaseController
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
+
     }
 }
