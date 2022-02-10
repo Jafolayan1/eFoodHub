@@ -13,7 +13,7 @@ namespace eFoodHub.UI.Controllers
         {
             _authService = authService;
         }
-        public IActionResult SignUp()
+        public IActionResult Signup()
         {
             return View();
         }
@@ -25,7 +25,7 @@ namespace eFoodHub.UI.Controllers
         }
 
         [HttpPost]
-        public IActionResult SignUp(UserModel model)
+        public IActionResult Signup(UserModel model)
         {
             if (ModelState.IsValid)
             {
@@ -66,15 +66,21 @@ namespace eFoodHub.UI.Controllers
             return View();
         }
 
-        public async Task<IActionResult> LogOut()
+        public async Task<IActionResult> Logout()
         {
-            await _authService.SignOut();
+            await _authService.Signout();
             return RedirectToAction("LogOutComplete");
         }
 
-        public IActionResult LogOutComplete()
+        public IActionResult LogoutComplete()
         {
             return View();
         }
+
+        public IActionResult Unauthorize()
+        {
+            return View();
+        }
+
     }
 }

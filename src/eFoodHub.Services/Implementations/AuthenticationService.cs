@@ -18,13 +18,13 @@ namespace eFoodHub.Services.Implementations
             _roleManager = roleManager;
         }
 
-        public User AuthenticateUser(string UserName, string Password)
+        public User AuthenticateUser(string userName, string Password)
         {
-            var result = _signInManager.PasswordSignInAsync(UserName, Password, false, lockoutOnFailure: false).Result;
+            var result = _signInManager.PasswordSignInAsync(userName, Password, false, lockoutOnFailure: false).Result;
 
             if (result.Succeeded)
             {
-                var user = _userManager.FindByNameAsync(UserName).Result;
+                var user = _userManager.FindByNameAsync(userName).Result;
                 var roles = _userManager.GetRolesAsync(user).Result;
                 user.Roles = roles.ToArray();
 
@@ -33,14 +33,16 @@ namespace eFoodHub.Services.Implementations
             return null;
         }
 
-        public bool CreateUser(User User, string Password)
+        public bool CreateUser(User user, string Password)
         {
-            var result = _userManager.CreateAsync(User, Password).Result;
+            var result = _userManager.CreateAsync(user, Password).Result;
             if (result.Succeeded)
             {
                 //Admin, User
-                string role = "Admin";
-                var res = _userManager.AddToRoleAsync(User, role).Result;
+                //string role = "Admin";
+
+                string role = "User";
+                var res = _userManager.AddToRoleAsync(user, role).Result;
                 if (res.Succeeded)
                 {
                     return true;
@@ -49,12 +51,12 @@ namespace eFoodHub.Services.Implementations
             return false;
         }
 
-        public User GetUser(string UserName)
+        public User GetUser(string userName)
         {
-            return _userManager.FindByNameAsync(UserName).Result;
+            return _userManager.FindByNameAsync(userName).Result;
         }
 
-        public async Task<bool> SignOut()
+        public async Task<bool> Signout()
         {
             try
             {

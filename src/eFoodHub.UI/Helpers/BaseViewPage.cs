@@ -11,7 +11,7 @@ namespace eFoodHub.UI.Helpers
         [RazorInject]
         public IUserAccessor UserAccessor { get; set; }
 
-        public User CurrenUser
+        public User CurrentUser
         {
             get
             {

@@ -3,11 +3,7 @@
 namespace eFoodHub.UI.Areas.User.Controllers
 {
     [Area("User")]
-    public class DashboardController : Controller
+    public class DashboardController : BaseController
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
     }
 }

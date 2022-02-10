@@ -18,6 +18,10 @@
     <ProjectReference Include="..\eFoodHub.Services\eFoodHub.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
   
 
 </Project>

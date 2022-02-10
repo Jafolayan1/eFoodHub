@@ -6,7 +6,7 @@ namespace eFoodHub.Services.Interfaces
     {
         bool CreateUser(User User, string Password);
 
-        Task<bool> SignOut();
+        Task<bool> Signout();
 
         User AuthenticateUser(string UserName, string Password);
 

@@ -1,7 +1,7 @@
 ﻿@model eFoodHub.UI.Models.UserModel
 
 @{
-    ViewData["Title"] = "SignUp";
+    ViewData["Title"] = "Signup";
 }
 
 <h1>SignUp</h1>
@@ -38,9 +38,10 @@
                 <input asp-for="PhoneNumber" class="form-control" />
                 <span asp-validation-for="PhoneNumber" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Sign uP" class="btn btn-primary" />
+            <div class="form-group p-3">
+                <input type="submit" value="Sign up" class="btn btn-primary" />
                 &nbsp; <a asp-action="Login" class="btn btn-warning" >Login</a>
+
             </div>
         </form>
     </div>
