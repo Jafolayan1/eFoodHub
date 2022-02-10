@@ -6,8 +6,8 @@ namespace eFoodHub.UI.Helpers
     [AttributeUsage(AttributeTargets.All)]
     public class CustomAuthorize : Attribute, IAuthorizationFilter
     {
-
         public string Roles { get; set; }
+
         public void OnAuthorization(AuthorizationFilterContext context)
         {
             if (context.HttpContext.User.Identity.IsAuthenticated)
@@ -18,7 +18,6 @@ namespace eFoodHub.UI.Helpers
                 {
                     context.Result = new RedirectToActionResult("Unauthorize", "Account", new { area = "" });
                 }
-
             }
             else
             {

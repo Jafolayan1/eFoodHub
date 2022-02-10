@@ -19,16 +19,19 @@ namespace eFoodHub.UI.Helpers
         private static string GenerateFileName(string fileName)
         {
             string[] strName = fileName.Split('.');
-            string strFileName = $"{DateTime.Now.ToUniversalTime():yyyyMMdd\\THHmmssfff}.{strName[^1]}";
+            string strFileName = DateTime.Now.ToUniversalTime().ToString("yyyyMMdd\\THHmmssfff") + "." + strName[strName.Length - 1];
+
+            //string strFileName = $"{DateTime.Now.ToUniversalTime():yyyyMMdd\\THHmmssfff}.{strName[^1]}";
 
             return strFileName;
         }
 
         public void DeleteFile(string imageUrl)
         {
-            if (File.Exists($"{_env.WebRootPath}{imageUrl}"))
+            //delete existing file
+            if (File.Exists(_env.WebRootPath + imageUrl))
             {
-                File.Delete($"{_env.WebRootPath}{imageUrl}");
+                File.Delete(_env.WebRootPath + imageUrl);
             }
         }
 
@@ -41,8 +44,10 @@ namespace eFoodHub.UI.Helpers
 
             //Saving File
             var fileName = GenerateFileName(file.FileName);
-            var fileStream = new FileStream(Path.Combine(uploads, fileName), FileMode.Create);
-            file.CopyToAsync(fileStream);
+            using (var fileStream = new FileStream(Path.Combine(uploads, fileName), FileMode.Create))
+            {
+                file.CopyToAsync(fileStream);
+            }
 
             return "/images/" + fileName;
         }

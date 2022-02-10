@@ -48,12 +48,12 @@
                 @Html.DisplayFor(modelItem => item.UnitPrice)
             </td>
             <td>
-                <img src="@item.ImageUrl" class="w-75"/>
+                <img src="@item.ImageUrl" class="w-50"/>
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new {  id=item.ItemId }) |
                 @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
-                @Html.ActionLink("Delete", "Delete", new { id=item.ItemId })
+                @Html.ActionLink("Delete", "Delete", new { id=item.ItemId ,url =item.ImageUrl })
             </td>
         </tr>
 }

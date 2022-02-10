@@ -10,14 +10,13 @@ namespace eFoodHub.Repositories
         //Needed if any migration
         public ApplicationDbContext()
         {
-
         }
 
         //Configuration from AppSettings
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
-
         }
+
         public DbSet<Category> Categories { get; set; }
         public DbSet<Item> Items { get; set; }
         public DbSet<ItemType> ItemTypes { get; set; }

@@ -8,7 +8,6 @@ builder.Services.AddControllersWithViews();
 builder.Services.ConfigureRepositoryServices(builder.Configuration);
 builder.Services.ConfigureDependenciesServices();
 
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

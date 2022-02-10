@@ -8,16 +8,17 @@ namespace eFoodHub.UI.Controllers
 {
     public class AccountController : Controller
     {
-        readonly IAuthenticationService _authService;
+        private readonly IAuthenticationService _authService;
+
         public AccountController(IAuthenticationService authService)
         {
             _authService = authService;
         }
+
         public IActionResult Signup()
         {
             return View();
         }
-
 
         public IActionResult Login()
         {
@@ -81,6 +82,5 @@ namespace eFoodHub.UI.Controllers
         {
             return View();
         }
-
     }
 }

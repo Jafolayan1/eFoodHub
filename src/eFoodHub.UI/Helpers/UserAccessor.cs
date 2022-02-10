@@ -15,6 +15,7 @@ namespace eFoodHub.UI.Helpers
             _contextAccessor = contextAccessor;
             _userManager = userManager;
         }
+
         /// <summary>
         /// A method to provide the details of currently logged in object user.
         /// HttpContext.User only provides the user name but we used usermanager to get userobjact which return the full user details

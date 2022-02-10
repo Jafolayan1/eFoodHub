@@ -9,7 +9,7 @@ namespace eFoodHub.UI.Models
         [Required(ErrorMessage = "Please Enter Name")]
         public string Name { get; set; }
 
-        public IFormFile File { get; set; }
+        public IFormFile? File { get; set; }
 
         [Required(ErrorMessage = "Please Enter Description")]
         public string Description { get; set; }
@@ -17,7 +17,7 @@ namespace eFoodHub.UI.Models
         [Required(ErrorMessage = "Please Enter UnitPrice")]
         public decimal UnitPrice { get; set; }
 
-        public string ImageUrl { get; set; }
+        public string? ImageUrl { get; set; }
 
         [Required(ErrorMessage = "Please Select Category")]
         public int CategoryId { get; set; }

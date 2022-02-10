@@ -22,6 +22,5 @@ namespace eFoodHub.UI.Models
 
         [Required(ErrorMessage = "Please Enter Phone Number ")]
         public string PhoneNumber { get; set; }
-
     }
 }
