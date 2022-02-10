@@ -20,6 +20,7 @@ namespace eFoodHub.UI.Helpers
         {
             string[] strName = fileName.Split('.');
             string strFileName = $"{DateTime.Now.ToUniversalTime():yyyyMMdd\\THHmmssfff}.{strName[^1]}";
+
             return strFileName;
         }
 
