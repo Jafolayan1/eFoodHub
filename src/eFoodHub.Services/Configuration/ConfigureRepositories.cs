@@ -1,5 +1,7 @@
 ﻿using eFoodHub.Entities;
 using eFoodHub.Repositories;
+using eFoodHub.Repositories.Implementations;
+using eFoodHub.Repositories.Interfaces;
 
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +13,7 @@ namespace eFoodHub.Services.Configuration
     /// <summary>
     /// Configures Datbase connection service (For IConfiguration...builder.Configuration is passed in program class.
     /// Configures Identity service for Users and Roles
-    /// Configures DbContext 
+    /// Configures DbContext
     /// </summary>
     public static class ConfigureRepositories
     {
@@ -37,6 +39,9 @@ namespace eFoodHub.Services.Configuration
             });
 
             services.AddScoped<DbContext, ApplicationDbContext>();
+            services.AddScoped<IRepository<Item>, Repository<Item>>();
+            services.AddScoped<IRepository<Category>, Repository<Category>>();
+            services.AddScoped<IRepository<ItemType>, Repository<ItemType>>();
         }
     }
 }
