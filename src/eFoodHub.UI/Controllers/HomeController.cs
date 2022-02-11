@@ -1,4 +1,5 @@
-﻿using eFoodHub.UI.Models;
+﻿using eFoodHub.Services.Interfaces;
+using eFoodHub.UI.Models;
 
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,6 +9,13 @@ namespace eFoodHub.UI.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly ICatalogService _catalogService;
+
+        public HomeController(ICatalogService catalogService)
+        {
+            _catalogService = catalogService;
+        }
+
         //private readonly ILogger<HomeController> _logger;
 
         //public HomeController(ILogger<HomeController> logger)
@@ -17,7 +25,8 @@ namespace eFoodHub.UI.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var items = _catalogService.GetItems();
+            return View(items);
         }
 
         public IActionResult Privacy()
