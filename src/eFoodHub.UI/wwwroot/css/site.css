@@ -1,9 +1,28 @@
-/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
+#toastCart {
+    bottom: 0;
+    right: 0;
+    z-index: 100;
+    position: fixed;
+}
+
+.noti_Counter {
+    background-color: #ec5252;
+    border-radius: 4px;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.43;
+    margin: -6px 0 0 5px;
+    padding: 0px 7px;
+    position: absolute;
+    white-space: nowrap;
+    z-index: 1;
+}
 
 a.navbar-brand {
     white-space: normal;
     text-align: center;
+    padding: 0 !important;
     word-break: break-all;
 }
 

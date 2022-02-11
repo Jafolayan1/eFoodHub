@@ -1,5 +1,6 @@
 ﻿using eFoodHub.Entities;
 using eFoodHub.Repositories.Interfaces;
+using eFoodHub.Repositories.Models;
 
 using Microsoft.EntityFrameworkCore;
 
@@ -26,7 +27,7 @@ namespace eFoodHub.Repositories.Implementations
 
         public int DeleteItem(Guid CartId, int ItemId)
         {
-            var item = Context.CartItems.Where(ci => ci.CartId == CartId && ci.Id == ItemId).FirstOrDefault();
+            CartItem item = Context.CartItems.Where(predicate: ci => ci.CartId == CartId && ci.ItemId == ItemId).FirstOrDefault();
 
             if (item != null)
             {
@@ -47,7 +48,7 @@ namespace eFoodHub.Repositories.Implementations
             {
                 for (int i = 0; i < cart.Items.Count; i++)
                 {
-                    if (cart.Items[i].Id == itemId)
+                    if (cart.Items[i].ItemId == itemId)
                     {
                         flag = true;
                         //for minus quantity
@@ -69,6 +70,33 @@ namespace eFoodHub.Repositories.Implementations
             Cart cart = GetCart(CartId);
             cart.UserId = UserId;
             return Context.SaveChanges();
+        }
+
+        public CartModel GetCartDetails(Guid CartId)
+        {
+            var model = (from cart in Context.Carts
+                         where cart.Id == CartId && cart.IsActive == true
+                         select new CartModel
+                         {
+                             Id = cart.Id,
+                             UserId = cart.UserId,
+                             CreatedDate = cart.CreatedDate,
+                             Items = (from cartItem in Context.CartItems
+                                      join item in Context.Items
+                                      on cartItem.ItemId equals item.ItemId
+                                      where cartItem.CartId == CartId
+                                      select new ItemModel
+                                      {
+                                          Id = cartItem.ItemId,
+                                          Name = item.Name,
+                                          Description = item.Description,
+                                          ImageUrl = item.ImageUrl,
+                                          Quantity = cartItem.Quantity,
+                                          ItemId = item.ItemId,
+                                          UnitPrice = cartItem.UnitPrice
+                                      }).ToList()
+                         }).FirstOrDefault();
+            return model;
         }
     }
 }

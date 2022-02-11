@@ -15,6 +15,7 @@ namespace eFoodHub.UI.Configuration
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddTransient<IUserAccessor, UserAccessor>();
             services.AddTransient<ICatalogService, CatalogService>();
+            services.AddTransient<ICartService, CartService>();
             services.AddTransient<IFileHelper, FileHelper>();
         }
     }

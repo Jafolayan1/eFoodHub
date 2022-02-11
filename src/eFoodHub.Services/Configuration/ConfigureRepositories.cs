@@ -38,10 +38,12 @@ namespace eFoodHub.Services.Configuration
                 //options.SignIn.RequireConfirmedPhoneNumber = false;
             });
 
-            services.AddScoped<DbContext, ApplicationDbContext>();
-            services.AddScoped<IRepository<Item>, Repository<Item>>();
-            services.AddScoped<IRepository<Category>, Repository<Category>>();
-            services.AddScoped<IRepository<ItemType>, Repository<ItemType>>();
+            services.AddTransient<DbContext, ApplicationDbContext>();
+            services.AddTransient<IRepository<Item>, Repository<Item>>();
+            services.AddTransient<IRepository<Category>, Repository<Category>>();
+            services.AddTransient<IRepository<ItemType>, Repository<ItemType>>();
+            services.AddTransient<IRepository<CartItem>, Repository<CartItem>>();
+            services.AddTransient<ICartRepository, CartRepository>();
         }
     }
 }

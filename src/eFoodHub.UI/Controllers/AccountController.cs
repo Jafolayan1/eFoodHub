@@ -47,13 +47,16 @@ namespace eFoodHub.UI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login(LoginModel model)
+        public IActionResult Login(LoginModel model, string returnUrl)
         {
             if (ModelState.IsValid)
             {
                 var user = _authService.AuthenticateUser(model.Email, model.Password);
                 if (user != null)
                 {
+                    if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                        return Redirect(returnUrl);
+
                     if (user.Roles.Contains("Admin"))
                     {
                         return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
