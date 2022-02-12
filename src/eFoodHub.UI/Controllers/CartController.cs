@@ -2,8 +2,8 @@
 using eFoodHub.Repositories.Models;
 using eFoodHub.Services.Interfaces;
 using eFoodHub.UI.Helpers;
+using eFoodHub.UI.Interfaces;
 
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 using System.Text.Json;
@@ -33,7 +33,7 @@ namespace eFoodHub.WebUI.Controllers
             }
         }
 
-        public CartController(ICartService cartService, UserManager<User> userManager) : base(userManager)
+        public CartController(ICartService cartService, /*UserManager<User> userManager*/ IUserAccessor userAccessor) : base(userAccessor/*userManager*/)
         {
             _cartService = cartService;
         }

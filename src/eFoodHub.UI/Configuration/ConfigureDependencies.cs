@@ -13,10 +13,16 @@ namespace eFoodHub.UI.Configuration
         public static void ConfigureDependenciesServices(this IServiceCollection services)
         {
             services.AddScoped<IAuthenticationService, AuthenticationService>();
+
             services.AddTransient<IUserAccessor, UserAccessor>();
+
             services.AddTransient<ICatalogService, CatalogService>();
             services.AddTransient<ICartService, CartService>();
+            services.AddTransient<IOrderService, OrderService>();
+
             services.AddTransient<IFileHelper, FileHelper>();
+
+            services.AddTransient<IRazorpayPaymentService, RazorpayPaymentService>();
         }
     }
 }

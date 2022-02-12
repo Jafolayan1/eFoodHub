@@ -1,4 +1,5 @@
 ﻿using eFoodHub.UI.Helpers;
+using eFoodHub.UI.Interfaces;
 
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,9 +9,22 @@ namespace eFoodHub.UI.Areas.User.Controllers
     [Area("User")]
     public class BaseController : Controller
     {
-        public IActionResult Index()
+        public Entities.User CurrentUser
         {
-            return View();
+            get
+            {
+                if (User != null)
+                    return _userAccessor.GetUser();
+                else
+                    return null;
+            }
+        }
+
+        private readonly IUserAccessor _userAccessor;
+
+        public BaseController(IUserAccessor userAccessor)
+        {
+            _userAccessor = userAccessor;
         }
     }
 }
