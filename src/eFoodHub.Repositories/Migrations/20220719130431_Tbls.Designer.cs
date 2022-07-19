@@ -12,8 +12,8 @@ using eFoodHub.Repositories;
 namespace eFoodHub.Repositories.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220207210852_Changed Description to Nullable in AspNetRoles")]
-    partial class ChangedDescriptiontoNullableinAspNetRoles
+    [Migration("20220719130431_Tbls")]
+    partial class Tbls
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -260,11 +260,8 @@ namespace eFoodHub.Repositories.Migrations
 
             modelBuilder.Entity("eFoodHub.Entities.PaymentDetails", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<Guid>("CartId")
                         .HasColumnType("uniqueidentifier");

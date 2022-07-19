@@ -34,7 +34,7 @@ namespace eFoodHub.Repositories
             {
                 //optionsBuilder.UseSqlServer(@"data source=Shailendra\SqlExpress; initial catalog=ePizzaHubSite;integrated security=True;");
 
-                optionsBuilder.UseSqlServer(@"data source=JAY\SqlExpress; initial catalog=eFoodHub;persist security info=True;user id=sa;password=Aadmiral10@;");
+                //optionsBuilder.UseSqlServer(@"data source=JAY\SqlExpress; initial catalog=eFoodHub;persist security info=True;user id=sa;password=Aadmiral10@;");
             }
             base.OnConfiguring(optionsBuilder);
         }
