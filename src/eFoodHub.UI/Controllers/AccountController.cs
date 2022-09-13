@@ -49,7 +49,7 @@ namespace eFoodHub.UI.Controllers
         [HttpPost]
         public IActionResult Login(LoginModel model, string returnUrl)
         {
-            if (ModelState.IsValid)
+            try
             {
                 var user = _authService.AuthenticateUser(model.Email, model.Password);
                 if (user != null)
@@ -67,6 +67,10 @@ namespace eFoodHub.UI.Controllers
                     }
                 }
             }
+            catch (Exception ex)
+            {
+                return View(ex.Message);
+            }
             return View();
         }
 
@@ -81,9 +85,19 @@ namespace eFoodHub.UI.Controllers
             return View();
         }
 
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+        public IActionResult RestPassword()
+        {
+            return View();
+        }
+
         public IActionResult Unauthorize()
         {
             return View();
         }
+
     }
 }

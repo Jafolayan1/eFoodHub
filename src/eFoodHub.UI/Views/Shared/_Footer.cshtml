@@ -1,78 +1,70 @@
-﻿ <!-- footer section -->
-  <footer class="footer_section">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4 footer-col">
-          <div class="footer_contact">
-            <h4>
-              Contact Us
-            </h4>
-            <div class="contact_link_box">
-              <a href="">
-                <i class="fa fa-map-marker" aria-hidden="true"></i>
-                <span>
-                  Location
-                </span>
-              </a>
-              <a href="">
-                <i class="fa fa-phone" aria-hidden="true"></i>
-                <span>
-                  Call +01 1234567890
-                </span>
-              </a>
-              <a href="">
-                <i class="fa fa-envelope" aria-hidden="true"></i>
-                <span>
-                  demo@gmail.com
-                </span>
-              </a>
+﻿  <!-- Footer Section here -->
+<footer>
+    <div class="main_footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="M_footer">
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 quick_links">
+                            <div class="title">Quick Links</div>
+                            <div class="main_cnt">
+                                <ul>
+                                    <li><a asp-action="About" class="trans" title="About us">About us</a></li>
+                                    <li><a asp-action="Faq" class="trans" title="Faq">Faq</a></li>
+                                    <li><a asp-action="ContactUs" class="trans" title="Contacts">Contacts</a></li>
+                                    <li><a asp-action="login" class="trans" title="Login">Login</a></li>
+                                    <li><a asp-action="Login" class="trans" title="Register">Register</a></li>
+                                    <li><a asp-action="terms_conditions" class="trans" title="Terms and conditions">Terms and conditions</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12 location">
+                            <div class="title">Our Location</div>
+                            <div class="main_cnt"> <span class="address"><a href="#">234 Main Street, Uni 01, New Mexico City</a></span> <span class="time1">Mon - Fri: 08:00 am - 10:00 pm</span> <span class="time2">Sat - Sun: 10:00 am - 11:00 pm<strong></strong></span> <span class="conact"><a href="tel:+01234567890">+01 (234) 56 56 789</a></span> </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 subscribe">
+                            <div class="title">Subscribe Us</div>
+                            <div class="main_cnt">
+                                <p class="sbcr_label">
+                                    Subscribe to the La Vie newsletter to
+                                    <br> get regular update about offers
+                                </p>
+                                <form asp-action="Subscribe" method="post" id="subscribeform" action="thank-you.html">
+                                    <div class="sbcrb_input">
+                                        <input type="text" name="subscribeemail" class="form-control" placeholder="Enter your email">
+                                        <button class="subscribebutton send" name="getbutton" type="submit">
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-        <div class="col-md-4 footer-col">
-          <div class="footer_detail">
-            <a href="" class="footer-logo">
-              Feane
-            </a>
-            <p>
-              Necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with
-            </p>
-            <div class="footer_social">
-              <a href="">
-                <i class="fa fa-facebook" aria-hidden="true"></i>
-              </a>
-              <a href="">
-                <i class="fa fa-twitter" aria-hidden="true"></i>
-              </a>
-              <a href="">
-                <i class="fa fa-linkedin" aria-hidden="true"></i>
-              </a>
-              <a href="">
-                <i class="fa fa-instagram" aria-hidden="true"></i>
-              </a>
-              <a href="">
-                <i class="fa fa-pinterest" aria-hidden="true"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 footer-col">
-          <h4>
-            Opening Hours
-          </h4>
-          <p>
-            Everyday
-          </p>
-          <p>
-            10.00 Am -10.00 Pm
-          </p>
-        </div>
-      </div>
-      <div class="footer-info">
-        <p>
-          &copy; <span id="displayYear"></span> All Rights Reserved
-        </p>
-      </div>
     </div>
-  </footer>
-  <!-- footer section -->
+    <div class="F_footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="payment"> <span>Payment Options</span> <span class="pay_cards"><img src="asset/images/card_img.png" alt=""></span> </div>
+                    <div class="social">
+                        <ul>
+                            <li><a href="#" class="trans" title="Facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                            <li><a href="#" class="trans" title="Twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                            <li><a href="#" class="trans" title="Google Plus"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                            <li><a href="#" class="trans" title="Instagram"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                            <li><a href="#" class="trans" title="Pinterest"><i class="fa fa-pinterest-p" aria-hidden="true"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="copyright">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <p>© <a asp-action="Index" class="trans" title="Crave Ordering">Crave Ordering</a> <script type="text/javascript">document.write(new Date().getFullYear());</script>, All rights reserved </p>
+        </div>
+    </div>
+</footer>
+<!-- Footer Section here -->
