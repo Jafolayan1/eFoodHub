@@ -4,9 +4,8 @@
     ViewData["Title"] = Model != null ? "Edit" :"Create";
 }
 
-<h1>Create</h1>
-<hr />
-<div class="row">
+
+@*<div class="row">
     <div class="col-md-4">
         <form asp-action="@ViewData["Title"]" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -58,6 +57,176 @@
                 &nbsp; <a asp-action="Index" asp-controller="Item" class="btn btn-warning">Cancel</a>
             </div>
         </form>
+    </div>
+</div>*@
+
+
+
+
+<!-- Body Content Wrapper -->
+<div class="ms-content-wrapper">
+    <div class="row">
+
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb pl-0">
+                    <li class="breadcrumb-item"><a href="#"><i class="material-icons">home</i> Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Menu</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Add Product</li>
+                </ol>
+            </nav>
+
+            <div class="alert alert-success" role="alert">
+                <strong>Well done!</strong> You successfully read this important alert message.
+            </div>
+        </div>
+
+
+
+        <div class="col-xl-6 col-md-12">
+            <div class="ms-panel ms-panel-fh">
+                <div class="ms-panel-header">
+                    <h6>Add Product Form</h6>
+                </div>
+                <div class="ms-panel-body">
+                    <form asp-action="@ViewData["Title"]" enctype="multipart/form-data" class="needs-validation clearfix">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input asp-for="ItemId" type="hidden" />
+                        <div class="form-row">
+                            <div class="col-md-12 mb-3">
+                                <label for="validationCustom18">Product Name</label>
+                                <div class="input-group">
+                                    <input asp-for="Name" type="text" class="form-control" id="validationCustom18" placeholder="Product Name" value="Pizza" required>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="validationCustom22">Select Catagory</label>
+                                <div class="input-group">
+                                        <select asp-for="CategoryId" class="form-control" asp-items="@(new SelectList(ViewBag.Categories,"CategoryId", "Name"))">
+                                            <option value="">---Select---</option>
+                                        </select>
+                                        <span asp-validation-for="CategoryId" class="text-danger"></span>
+                                    <div class="invalid-feedback">
+                                        Please select a Catagory.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="validationCustom23">Item Type</label>
+                                <div class="input-group">
+                                    <select asp-for="ItemTypeId" class="form-control" asp-items="@(new SelectList(ViewBag.ItemTypes,"ItemTypeId", "Name"))">
+                                        <option value="">---Select---</option>
+                                    </select>
+                                    <span asp-validation-for="ItemTypeId" class="text-danger"></span>
+                                    <div class="invalid-feedback">
+                                        Please select Item Type
+                                    </div>
+                                </div>
+                            </div>
+                            @*<div class="col-md-6 mb-3">
+                                <label for="validationCustom24">Short Description</label>
+                                <div class="input-group">
+                                    <input asp-for="Description" type="text" class="form-control" id="validationCustom24"  required>
+                                    <div class="invalid-feedback">
+                                        Description
+                                    </div>
+                                </div>
+                            </div>*@
+                            <div class="col-md-6 mb-3">
+                                <label for="validationCustom25">Price</label>
+                                <div class="input-group">
+                                    <input asp-for="UnitPrice" type="text" class="form-control" id="validationCustom25" placeholder="$10" required>
+                                    <div class="invalid-feedback">
+                                        Price
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <label for="validationCustom12">Description</label>
+                                <div class="input-group">
+                                    <textarea rows="5" asp-for="Description" id="validationCustom12" class="form-control" placeholder="Short Description" required></textarea>
+                                    <div class="invalid-feedback">
+                                        Please provide a description.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <label for="validationCustom12">Product Image</label>
+                                <div class="custom-file">
+                                    <input asp-for="File" type="file" class="custom-file-input" id="validatedCustomFile">
+                                    <label class="custom-file-label" for="validatedCustomFile">Upload Image</label>
+                                    <div class="invalid-feedback">invalid custom file</div>
+                                    <br />
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-xl-6 col-md-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="ms-panel">
+                        <div class="ms-panel-header">
+                            <h6>Product </h6>
+                        </div>
+                        <div class="ms-panel-body">
+                            <div id="imagesSlider" class="ms-image-slider carousel slide" data-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        @if (Model != null && !string.IsNullOrEmpty(Model.ImageUrl))
+                                        {
+                                            <input type="hidden" asp-for="ImageUrl" />
+                                            <img id="itemImage" class="d-block w-100" src="@Model.ImageUrl" alt="First slide">
+                                        }
+                                    </div>
+                                </div>
+                                <ol class="carousel-indicators">
+                                    @if (Model != null && !string.IsNullOrEmpty(Model.ImageUrl))
+                                    {
+                                        <li data-target="#imagesSlider" data-slide-to="0" class="active"> <img class="d-block w-100" src="@Model.ImageUrl" alt="First slide"></li>
+                                    }
+                                </ol>
+                            </div>
+                        </div>
+                        <div class="ms-panel-header new">
+                            <p class="medium">Status Available</p>
+                            <div>
+                                <label class="ms-switch">
+                                    <input type="checkbox">
+                                    <span class="ms-switch-slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="ms-panel-header new">
+                            <p class="medium">Discount Active</p>
+                            <div>
+                                <label class="ms-switch">
+                                    <input type="checkbox" checked="">
+                                    <span class="ms-switch-slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="ms-panel-header new">
+                            <button class="btn btn-secondary d-block" type="submit">Save</button>
+                            &nbsp; <a asp-action="Index" asp-controller="Item" class="btn btn-warning">Cancel</a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
 

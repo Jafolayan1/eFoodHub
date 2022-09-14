@@ -79,7 +79,7 @@
           </li>
           <li> <a asp-controller="Item" asp-action="Create">Add Product</a>
           </li>
-          <li> <a asp-controller="Item" asp-action="Detail">Product Detail</a>
+          <li> <a asp-controller="Item" asp-action="Index">Product Detail</a>
           </li>
         </ul>
       </li>
@@ -980,6 +980,7 @@
   <script src="~/panel/assets/js/framework.js"></script>
   <!-- Settings -->
   <script src="~/panel/assets/js/settings.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 
 </html>
