@@ -15,7 +15,7 @@ namespace eFoodHub.UI.Controllers
             _authService = authService;
         }
 
-        public IActionResult Signup()
+        public IActionResult Register()
         {
             return View();
         }
@@ -26,15 +26,15 @@ namespace eFoodHub.UI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Signup(UserModel model)
+        public IActionResult Register(RegisterModel model)
         {
-            if (ModelState.IsValid)
+            try
             {
                 User user = new()
                 {
                     Name = model.Name,
-                    Email = model.Email,
-                    UserName = model.Email,
+                    Email = model.EmailAddress,
+                    UserName = model.EmailAddress,
                     PhoneNumber = model.PhoneNumber
                 };
                 bool result = _authService.CreateUser(user, model.Password);
@@ -42,8 +42,15 @@ namespace eFoodHub.UI.Controllers
                 {
                     return RedirectToAction(nameof(Login));
                 }
+                return View();
             }
-            return View();
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+                return View();
+            }
+
+
         }
 
         [HttpPost]

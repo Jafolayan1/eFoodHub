@@ -29,7 +29,7 @@
                                     Subscribe to the La Vie newsletter to
                                     <br> get regular update about offers
                                 </p>
-                                <form asp-action="Subscribe" method="post" id="subscribeform" action="thank-you.html">
+                                <form asp-controller="Account" asp-action="Subscribe" method="post" id="subscribeform">
                                     <div class="sbcrb_input">
                                         <input type="text" name="subscribeemail" class="form-control" placeholder="Enter your email">
                                         <button class="subscribebutton send" name="getbutton" type="submit">
@@ -47,7 +47,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="payment"> <span>Payment Options</span> <span class="pay_cards"><img src="asset/images/card_img.png" alt=""></span> </div>
+                    <div class="payment"> <span>Payment Options</span> <span class="pay_cards"><img src="~/asset/images/card_img.png" alt=""></span> </div>
                     <div class="social">
                         <ul>
                             <li><a href="#" class="trans" title="Facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
@@ -63,7 +63,7 @@
     </div>
     <div class="copyright">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <p>© <a asp-action="Index" class="trans" title="Crave Ordering">Crave Ordering</a> <script type="text/javascript">document.write(new Date().getFullYear());</script>, All rights reserved </p>
+            <p>© <a asp-controller="Home" asp-action="Index" class="trans" title="Crave Ordering">Crave Ordering</a> <script type="text/javascript">document.write(new Date().getFullYear());</script>, All rights reserved </p>
         </div>
     </div>
 </footer>

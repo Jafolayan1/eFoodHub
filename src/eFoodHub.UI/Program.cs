@@ -5,9 +5,15 @@ using eFoodHub.UI.Configuration;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+var mvcBuilder = builder.Services.AddControllersWithViews();
+if (builder.Environment.IsDevelopment())
+{
+    mvcBuilder.AddRazorRuntimeCompilation();
+}
 builder.Services.ConfigureRepositoryServices(builder.Configuration);
 builder.Services.ConfigureDependenciesServices();
+
+
 //Configures accessing razor pay from appsettings
 builder.Services.Configure<RazorPayConfig>(builder.Configuration.GetSection("RazorPayConfig"));
 

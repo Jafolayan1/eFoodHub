@@ -1,34 +1,138 @@
-﻿@model eFoodHub.UI.Models.LoginModel
-
+﻿@model AuthencationModel
 @{
-    ViewData["Title"] = "Login";
-    Layout = null;
+    ViewData["Title"] = "Login Page";
+    Layout = "_PublicLayout";
 }
+<partial name="_LoginHeader"/>
 
-<h1>Login</h1>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Login" asp-route-returnUrl="@Context.Request.Query["ReturnUrl"]">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input type="email" asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
+<!-- breadcum section -->
+
+<div class="breadcum">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="main_breadcum">
+                    <ul>
+                        <li><a asp-controller="Home" asp-action="Index" class="trans" title="Home">Home</a></li>
+                        <li>Login</li>
+                    </ul>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
-                <input type="password" asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-            <div class="form-group p-3">
-                <input type="submit" value="Login" class="btn btn-primary" />
-                &nbsp; <a asp-action="SignUp"  class="btn btn-warning">SignUp</a>
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+<!-- breadcum section -->
+<!-- Our login section -->
+<section id="login">
+    <div class="login_section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="main_login">
+                        <div class="login_left col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="login_box">
+                                <h2 class="title">Sign in</h2>
+                                <form asp-controller="Account" asp-action="Login" method="post" enctype="multipart/form-data" id="loginform" >
+                                    <div class="login_form">
+                                        <ul>
+                                            <li>
+                                                <label for="Email">Email Address</label>
+                                                <input asp-for="Login.Email" class="form-control" id="EmailAddress" name="Email" title="Email Address" type="email">
+                                            </li>
+                                            <li>
+                                                <label for="Password">Password</label>
+                                                <input asp-for="Login.Password" class="form-control" title="Password" id="Password" name="Password" type="password">
+                                            </li>
+                                            <li class="half checkbox">
+                                                <input id="check4" type="checkbox" name="check" value="Bike">
+                                                <label for="check4">Remember Me</label>
+                                            </li>
+                                            <li class="half text-right">
+                                                <a asp-controller="Account" asp-action="ForgotPassword" class="trans">Forgotten Password ?</a>
+                                            </li>
+                                            <li>
+                                                <button type="submit" class="loginbutton red_btn trans squre-btn hvr-ripple-out" name="Login">Login</button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="signup_right col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="login_box">
+                                <h2 class="title">Create New Account</h2>
+                                <h4 class="create_ac">Create your Account</h4>
+                                <form asp-controller="Account" asp-action="Register" method="post" id="registrationform">
+                                    <ul>
+                                         <li>
+                                            <label for=""> Name</label>
+                                            <input asp-for="Register.Name" class="form-control" name="Name" title="Full Name" type="text">
+                                            <span asp-validation-for="Register.Name"></span>
+
+                                        </li>
+                                        <li>
+                                            <label for="EmailAddress">Email Address</label>
+                                            <input asp-for="Register.EmailAddress" class="form-control" name="EmailAddress" title="Email Address" type="email">
+                                        </li>
+                                        <li>
+                                            <label for="PhoneNo">Phone Number</label>
+                                            <input asp-for="Register.PhoneNumber" class="form-control" title="Phoneno" id="phoneno" name="phoneno" type="number">
+                                            <span asp-validation-for="Register.PhoneNumber"></span>
+
+                                        </li>
+                                        <li>
+                                            <label for="Password">Password</label>
+                                            <input asp-for="Register.Password" class="form-control" title="Password" id="Password" name="password" type="password">
+                                        </li>
+                                        <li>
+                                            <label for="Password">Confirm Password</label>
+                                            <input asp-for="Register.ConfirmPassword" class="form-control" title="Password" id="Password" name="ConfirmPassword" type="password">
+                                            <span asp-validation-for="Register.ConfirmPassword"></span>
+                                        </li>
+                                        <li>
+                                            <button type="submit" class="register-btn red_btn trans squre-btn hvr-ripple-out" name="Register">Register</button>
+                                        </li>
+                                    </ul>
+                                </form>
+                                <h4 class="title_checklist">Sign up today and you will be able to :</h4>
+                                <ul class="checklist">
+                                    <li class="checkbox">
+                                        <input id="check1" type="checkbox" name="check" value="Bike">
+                                        <label for="check1">Speed your way through the checkout</label>
+                                    </li>
+                                    <li class="checkbox">
+                                        <input id="check2" type="checkbox" name="check" value="Bike">
+                                        <label for="check2">Track your orders easily</label>
+                                    </li>
+                                    <li class="checkbox">
+                                        <input id="check3" type="checkbox" name="check" value="Bike">
+                                        <label for="check3">Keep a record of all your purchases</label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Our login section -->
+<!-- Quick Order Section -->
+<section>
+    <div class="quick_order">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="main_quickorder">
+                        <h3 class="title">Call Us for Quick Order</h3>
+                        <div class="cntct typewriter-effect"><span class="call_desk"><a href="tel:+01234567890" id="typewriter_num"></a></span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Quick Order Section -->
+

@@ -1,11 +1,10 @@
-﻿using eFoodHub.UI.Helpers;
-using eFoodHub.UI.Interfaces;
+﻿using eFoodHub.UI.Interfaces;
 
 using Microsoft.AspNetCore.Mvc;
 
 namespace eFoodHub.UI.Areas.User.Controllers
 {
-    [CustomAuthorize(Roles = "User")]
+    //[CustomAuthorize(Roles = "User")]
     [Area("User")]
     public class BaseController : Controller
     {

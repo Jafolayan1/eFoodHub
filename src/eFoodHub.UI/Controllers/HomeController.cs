@@ -16,17 +16,21 @@ namespace eFoodHub.UI.Controllers
             _catalogService = catalogService;
         }
 
-        //private readonly ILogger<HomeController> _logger;
-
-        //public HomeController(ILogger<HomeController> logger)
-        //{
-        //    _logger = logger;
-        //}
-
         public IActionResult Index()
         {
             var items = _catalogService.GetItems();
             return View(items);
+        }
+
+        public IActionResult About()
+        {
+            return View();
+        }
+
+
+        public IActionResult Menu()
+        {
+            return View();
         }
 
         public IActionResult Privacy()

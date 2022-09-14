@@ -11,5 +11,7 @@ namespace eFoodHub.UI.Models
         [Required(ErrorMessage = "Enter password")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
+
+        public string ConfirmPassword { get; set; }
     }
 }
