@@ -1,7 +1,8 @@
-﻿@model AuthencationModel
-@{
+﻿@{
     ViewData["Title"] = "Login Page";
     Layout = "_PublicLayout";
+    LoginModel Login = new LoginModel();
+    RegisterModel Register = new RegisterModel();
 }
 <partial name="_LoginHeader"/>
 
@@ -26,6 +27,7 @@
 <!-- Our login section -->
 <section id="login">
     <div class="login_section">
+            <span style="color:red;text-align:center;">@TempData["info"]</span>
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -33,16 +35,16 @@
                         <div class="login_left col-lg-6 col-md-6 col-sm-12 col-xs-12">
                             <div class="login_box">
                                 <h2 class="title">Sign in</h2>
-                                <form asp-controller="Account" asp-action="Login" method="post" enctype="multipart/form-data" id="loginform" >
+                                <form asp-action="Login" method="post" asp-route-returnurl="@Context.Request.Query["ReturnUrl"]" enctype="multipart/form-data" id="loginform" >
                                     <div class="login_form">
                                         <ul>
                                             <li>
                                                 <label for="Email">Email Address</label>
-                                                <input asp-for="Login.Email" class="form-control" id="EmailAddress" name="Email" title="Email Address" type="email">
+                                                <input asp-for="@Login.Email" class="form-control" id="EmailAddress" name="Email" title="Email Address" type="email">
                                             </li>
                                             <li>
                                                 <label for="Password">Password</label>
-                                                <input asp-for="Login.Password" class="form-control" title="Password" id="Password" name="Password" type="password">
+                                                <input asp-for="@Login.Password" class="form-control" title="Password" id="Password" name="Password" type="password">
                                             </li>
                                             <li class="half checkbox">
                                                 <input id="check4" type="checkbox" name="check" value="Bike">
@@ -67,28 +69,17 @@
                                     <ul>
                                          <li>
                                             <label for=""> Name</label>
-                                            <input asp-for="Register.Name" class="form-control" name="Name" title="Full Name" type="text">
-                                            <span asp-validation-for="Register.Name"></span>
+                                            <input asp-for="@Register.Name" class="form-control" name="Name" title="Full Name" type="text">
+                                            <span asp-validation-for="@Register.Name"></span>
 
                                         </li>
                                         <li>
                                             <label for="EmailAddress">Email Address</label>
-                                            <input asp-for="Register.EmailAddress" class="form-control" name="EmailAddress" title="Email Address" type="email">
-                                        </li>
-                                        <li>
-                                            <label for="PhoneNo">Phone Number</label>
-                                            <input asp-for="Register.PhoneNumber" class="form-control" title="Phoneno" id="phoneno" name="phoneno" type="number">
-                                            <span asp-validation-for="Register.PhoneNumber"></span>
-
+                                            <input asp-for="@Register.EmailAddress" class="form-control"  name="EmailAddress" title="Email Address" type="email">
                                         </li>
                                         <li>
                                             <label for="Password">Password</label>
-                                            <input asp-for="Register.Password" class="form-control" title="Password" id="Password" name="password" type="password">
-                                        </li>
-                                        <li>
-                                            <label for="Password">Confirm Password</label>
-                                            <input asp-for="Register.ConfirmPassword" class="form-control" title="Password" id="Password" name="ConfirmPassword" type="password">
-                                            <span asp-validation-for="Register.ConfirmPassword"></span>
+                                            <input asp-for="@Register.Password" class="form-control" name="Password" title="Password" id="Password"  type="password">
                                         </li>
                                         <li>
                                             <button type="submit" class="register-btn red_btn trans squre-btn hvr-ripple-out" name="Register">Register</button>

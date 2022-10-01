@@ -82,6 +82,7 @@ namespace eFoodHub.WebUI.Controllers
         public IActionResult GetCartCount()
         {
             int count = _cartService.GetCartCount(CartId);
+            ViewBag.CartCout = count;
             return Json(count);
         }
 

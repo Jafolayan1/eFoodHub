@@ -11,11 +11,21 @@ namespace eFoodHub.Entities
         [Precision(18, 4)]
         public decimal UnitPrice { get; set; }
 
+        public Size Size { get; set; }
+        public bool IsPopular { get; set; }
         public string ImageUrl { get; set; }
         public int CategoryId { get; set; }
         public int ItemTypeId { get; set; }
 
         public virtual Category Category { get; set; }
         public virtual ItemType ItemType { get; set; }
+    }
+
+    public enum Size : short
+    {
+        Extra_Large,
+        Large,
+        Middium,
+        Small
     }
 }

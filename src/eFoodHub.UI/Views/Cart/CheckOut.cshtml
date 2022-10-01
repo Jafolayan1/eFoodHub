@@ -1,49 +1,78 @@
-﻿@model eFoodHub.Entities.Address
-
+﻿
 @{
     ViewData["Title"] = "CheckOut";
+    Layout = "_PublicLayout";
+    Address address = new Address();
 }
 
-<h1>CheckOut</h1>
-
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="CheckOut" >
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            
-            <div class="form-group">
-                <label asp-for="Street" class="control-label"></label>
-                <input asp-for="Street" class="form-control" />
-                <span asp-validation-for="Street" class="text-danger"></span>
+<partial name="_CheckoutHeader"/>
+<!-- breadcum section -->
+<div class="breadcum">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="main_breadcum">
+                    <ul>
+                        <li><a asp-controller="Home" asp-action="Index" class="trans" title="Home">Home</a></li>
+                        <li><a asp-controller="Cart" asp-action="Index" class="trans" title="Cart">Cart</a></li>
+                        <li>Checkout</li>
+                    </ul>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Locality" class="control-label"></label>
-                <input asp-for="Locality" class="form-control" />
-                <span asp-validation-for="Locality" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ZipCode" class="control-label"></label>
-                <input asp-for="ZipCode" class="form-control" />
-                <span asp-validation-for="ZipCode" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="City" class="control-label"></label>
-                <input asp-for="City" class="form-control" />
-                <span asp-validation-for="City" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PhoneNumber" class="control-label"></label>
-                <input asp-for="PhoneNumber" class="form-control" />
-                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-            </div>
-           
-            <div class="form-group">
-                <input type="submit" value="Continue" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
+<!-- breadcum section -->
+<!-- Our cart section -->
+<section>
+    <div class="main_checkout">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="inner_checkout ">
+                        <form asp-action="Checkout" method="post" id="checkoutform">
+                            <div class="left_cnt col-lg-8 col-md-7 col-sm-12 col-xs-12">
+                                <h2 class="title">Delivery Address</h2>
 
+                                <div class="checkout-form">
+                                    <ul>
+                                        
+                                        <li class="fullwidth">
+                                            <label for="Street">Address<span>*</span></label>
+                                            <input asp-for="@address.Street" type="text" class="form-control" placeholder="Street Address" id="Address">
+                                            <span asp-validation-for="@address.Street"></span>
+                                        </li>
+                                        <li>
+                                            <label for="Locality">Locality<span>*</span></label>
+                                            <input asp-for="@address.Locality" type="text" class="form-control" id="Town">
+                                        </li>
+                                        <li>
+                                            <label for="PostcodeZip">Post code / Zip<span>*</span></label>
+                                            <input asp-for="@address.ZipCode" type="text" class="form-control" id="PostcodeZip">
+                                        </li>
+                                        <li>
+                                            <label for="Town">Town / City<span>*</span></label>
+                                            <input asp-for="@address.City" type="text" class="form-control" id="Town">
+                                        </li>
+                                        <li>
+                                            <label for="phoneno">Phone Number<span>*</span></label>
+                                            <input asp-for="@address.PhoneNumber" type="number" class="form-control" id="Town">
+                                        </li>
+                                    </ul>
+                                    <ul>
+                                        <li>
+                                            <button type="submit" class="checkout-btn red_btn trans hvr-float-shadow" name="checkout">Proceed</button>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 

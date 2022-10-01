@@ -2,11 +2,5 @@
 @{
     ViewData["Title"] = "Index";
 }
-<div class="ms-content-wrapper">
-    <div class="row">
-<div class="col-md-12">
-    <h1 class="db-header-title">Welcome, @CurrentUser.Name</h1>
-    @await Component.InvokeAsync("FoodMenu")
-</div>
-    </div>
-</div>
+
+@await Component.InvokeAsync("FoodMenu")

@@ -45,7 +45,9 @@ namespace eFoodHub.UI.Areas.Admin.Controllers
                     ItemTypeId = model.ItemTypeId,
                     Description = model.Description,
                     ImageUrl = model.ImageUrl,
-                    ItemId = model.ItemId
+                    ItemId = model.ItemId,
+                    Size = model.Size,
+                    IsPopular = model.IsPopular
                 };
                 _catalogService.AddItem(data);
                 return RedirectToAction("Index");
@@ -59,6 +61,7 @@ namespace eFoodHub.UI.Areas.Admin.Controllers
             return View();
         }
 
+        [HttpGet]
         public IActionResult Edit(int id)
         {
             ViewBag.Categories = _catalogService.GetCategories();
@@ -72,7 +75,9 @@ namespace eFoodHub.UI.Areas.Admin.Controllers
                 CategoryId = data.CategoryId,
                 ItemTypeId = data.ItemTypeId,
                 Description = data.Description,
-                ImageUrl = data.ImageUrl
+                ImageUrl = data.ImageUrl,
+                Size = data.Size,
+                IsPopular = data.IsPopular
             };
             return View("Create", model);
         }
@@ -96,7 +101,9 @@ namespace eFoodHub.UI.Areas.Admin.Controllers
                     CategoryId = model.CategoryId,
                     ItemTypeId = model.ItemTypeId,
                     Description = model.Description,
-                    ImageUrl = model.ImageUrl
+                    ImageUrl = model.ImageUrl,
+                    Size = model.Size,
+                    IsPopular = model.IsPopular
                 };
 
                 _catalogService.UpdateItem(data);

@@ -21,7 +21,7 @@ namespace eFoodHub.Services.Configuration
         {
             services.AddDbContext<ApplicationDbContext>((options) =>
             {
-                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("eFoodHub.UI"));
             });
             services.AddIdentity<User, Role>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -34,8 +34,6 @@ namespace eFoodHub.Services.Configuration
                 options.Password.RequireLowercase = false;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
-                //options.SignIn.RequireConfirmedEmail = false;
-                //options.SignIn.RequireConfirmedPhoneNumber = false;
             });
 
             services.AddTransient<DbContext, ApplicationDbContext>();

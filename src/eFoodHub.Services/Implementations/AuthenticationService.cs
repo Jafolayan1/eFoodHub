@@ -38,10 +38,7 @@ namespace eFoodHub.Services.Implementations
             var result = _userManager.CreateAsync(user, Password).Result;
             if (result.Succeeded)
             {
-                //Admin, User
-                //string role = "Admin";
-
-                string role = "Admin";
+                string role = "User";
                 var res = _userManager.AddToRoleAsync(user, role).Result;
                 if (res.Succeeded)
                 {

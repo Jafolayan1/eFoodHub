@@ -10,109 +10,136 @@ using eFoodHub.WebUI.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
+using PayStack.Net;
+
+using System.Text.Json;
+
 namespace eFoodHub.UI.Controllers
 {
     public class PaymentController : BaseController
     {
-        private readonly IOptions<RazorPayConfig> _razorPayConfig;
-        private readonly IRazorpayPaymentService _paymentService;
+        private readonly IPaymentService _paymentService;
         private readonly IOrderService _orderService;
+        private readonly IOptions<PayStackConfig> _payStackConfig;
+        private readonly PayStackApi _client;
 
-        public PaymentController(IRazorpayPaymentService paymentService, IOptions<RazorPayConfig> razorPayConfig, IUserAccessor userAccessor, IOrderService orderService) : base(userAccessor)
+        public PaymentController(IPaymentService paymentService, IOptions<PayStackConfig> payStackConfig, IUserAccessor userAccessor, IOrderService orderService) : base(userAccessor)
         {
-            _razorPayConfig = razorPayConfig;
-            _paymentService = paymentService;
             _orderService = orderService;
+            _paymentService = paymentService;
+            _payStackConfig = payStackConfig;
+            if (_client == null)
+            {
+                _client = new PayStackApi(_payStackConfig.Value.Key);
+            }
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
-            RazorPaymentModel payment = new();
+            PaymentModel payment = new();
             CartModel cart = TempData.Peek<CartModel>("Cart");
             if (cart != null)
             {
                 payment.Cart = cart;
             }
             payment.GrandTotal = Math.Round(cart.GrandTotal);
-            payment.Currency = "INR";
             string items = "";
             foreach (var item in cart.Items)
             {
                 items += item.Name + ",";
             }
             payment.Description = items;
-            payment.RazorpayKey = _razorPayConfig.Value.Key;
-            payment.Receipt = Guid.NewGuid().ToString();
-
-            //flow in razor pay: need to create order first
-            payment.OrderId = _paymentService.CreateOrder(payment.GrandTotal * 100, payment.Currency, payment.Receipt);
-
             return View(payment);
         }
 
         [HttpPost]
-        public IActionResult Status(IFormCollection form)
+        public IActionResult Index(IFormCollection form)
+        {
+            decimal amount = Convert.ToDecimal(form["amount"]) * 100;
+            string email = form["email"];
+            string currency = form["currency"];
+            var response = _paymentService.MakePayment(amount, email, currency);
+            if (response.Status)
+            {
+                TempData["reference"] = response.Data.Reference;
+                return Redirect(response.Data.AuthorizationUrl);
+            }
+            ViewData["error"] = "One or more errors occured";
+            return View(typeof(Index));
+        }
+
+        [HttpGet]
+        public IActionResult Verify(string reference)
         {
             try
             {
-                if (form.Keys.Count > 0 && !String.IsNullOrWhiteSpace(form["rzp_paymentid"]))
+                var response = _client.Transactions.Verify(reference);
+
+                var payment = JsonSerializer.Deserialize<Rootobject>(response.RawJson);
+
+                var paymentId = payment.data.id.ToString();
+
+                if (response.Data.Status == "success")
                 {
-                    string paymentId = form["rzp_paymentid"];
-                    string orderId = form["rzp_orderid"];
-                    string signature = form["rzp_signature"];
-                    string transactionId = form["Receipt"];
-                    string currency = form["Currency"];
-
-                    var payment = _paymentService.GetPaymentDetails(paymentId);
-                    bool IsSignVerified = _paymentService.VerifySignature(signature, orderId, paymentId);
-
-                    if (IsSignVerified && payment != null)
+                    CartModel cart = TempData.Get<CartModel>("Cart");
+                    PaymentDetails model = new()
                     {
-                        CartModel cart = TempData.Get<CartModel>("Cart");
-                        PaymentDetails model = new();
+                        CartId = cart.Id,
+                        Total = cart.Total,
+                        Tax = cart.Tax,
+                        GrandTotal = cart.GrandTotal,
 
-                        model.CartId = cart.Id;
-                        model.Total = cart.Total;
-                        model.Tax = cart.Tax;
-                        model.GrandTotal = cart.GrandTotal;
+                        Status = response.Data.Status,
+                        TransactionId = paymentId,
+                        Currency = response.Data.Currency,
+                        Email = response.Data.Customer.Email,
+                        Id = Guid.NewGuid().ToString(),
+                        UserId = CurrentUser.Id
+                    };
 
-                        model.Status = payment.Attributes["status"]; //captured
-                        model.TransactionId = transactionId;
-                        model.Currency = payment.Attributes["currency"];
-                        model.Email = payment.Attributes["email"];
-                        model.Id = paymentId;
-                        model.UserId = CurrentUser.Id;
+                    int status = _paymentService.SavePaymentDetails(model);
+                    if (status > 0)
+                    {
+                        Response.Cookies.Append("CId", "");
 
-                        int status = _paymentService.SavePaymentDetails(model);
-                        if (status > 0)
-                        {
-                            Response.Cookies.Append("CId", ""); //resettingg cartId in cookie
+                        Address address = TempData.Get<Address>("Address");
+                        _orderService.PlaceOrder(CurrentUser.Id, paymentId, paymentId, cart, address);
 
-                            Address address = TempData.Get<Address>("Address");
-                            _orderService.PlaceOrder(CurrentUser.Id, orderId, paymentId, cart, address);
-
-                            //TO DO: Send email
-                            TempData.Set("PaymentDetails", model);
-                            return RedirectToAction("Receipt");
-                        }
-                        else
-                        {
-                            ViewBag.Message = "Although, due to some technical issues it's not get updated in our side. We will contact you soon..";
-                        }
+                        //TO DO: Send email
+                        TempData.Set("PaymentDetails", model);
+                        return RedirectToAction("Receipt");
+                    }
+                    else
+                    {
+                        ViewBag.Message = "Due to some technical issues it's not get updated in our side. We will contact you soon..";
+                        ViewData["error"] = response.Data.GatewayResponse;
                     }
                 }
             }
             catch (Exception)
             {
             }
-            ViewBag.Message = "Your payment has been failed. You can contact us at support@dotnettricks.com.";
-            return View();
+            ViewData["error"] = "Your payment has been failed. You can contact us at support@craveordering.com.";
+            return View(nameof(Index));
         }
 
         public IActionResult Receipt()
         {
             PaymentDetails model = TempData.Peek<PaymentDetails>("PaymentDetails");
             return View(model);
+        }
+
+        public class Rootobject
+        {
+            public bool status { get; set; }
+            public string dessage { get; set; }
+            public Data data { get; set; }
+        }
+
+        public class Data
+        {
+            public ulong id { get; set; }
         }
     }
 }

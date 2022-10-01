@@ -14,7 +14,14 @@
                                     <li><a asp-controller="Home" asp-action="Index" class="trans hvr-underline-from-left">Home</a></li>
                                     <li><a asp-controller="Home" asp-action="About" class="trans">About</a></li>
                                     <li><a asp-controller="Home" asp-action="Menu" class="trans">Order</a></li>
-                                    <li><a asp-controller="Account" asp-action="Login" class="trans">Login</a></li>
+                                    @if (CurrentUser is null)
+                                    {
+                                        <li><a asp-controller="Account" asp-action="Login" class="trans">LogIN</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li><a asp-controller="Account" asp-action="Login" class="trans">Logout</a></li>
+                                    }
                                     <li><a asp-controller="Account" asp-action="Login" class="trans">Register</a></li>
                                 </ul>
                             </div>

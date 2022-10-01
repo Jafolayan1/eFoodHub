@@ -18,7 +18,8 @@
     <link rel="stylesheet" href="~/asset/css/slick.css" >
     <link rel="stylesheet" href="~/asset/css/style.css" >
     <link rel="stylesheet" href="~/asset/css/my-account.css" >
-    <link rel="stylesheet" href="~/asset/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 
     <!-- bootstrap -->
     <link rel="stylesheet" href="~/asset/css/bootstrap.min.css" >
@@ -35,9 +36,11 @@
         <partial name=_Footer/>
     </div>
     <!-- JS Here -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.min.js" integrity="sha512-wT7uPE7tOP6w4o28u1DN775jYjHQApdBnib5Pho4RB0Pgd9y7eSkAV1BTqQydupYDB9GBhTcQQzyNMPMV3cAew==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="~/js/cart.js"></script>
     <script src="~/asset/js/custome.js" defer></script>
     <script src="~/asset/js/slick.js" defer></script>
-    <script src="~/asset/js/jquery.validate.min.js" defer></script>
      <!-- JS Here -->
     @await RenderSectionAsync("Scripts", required: false)
 </body>

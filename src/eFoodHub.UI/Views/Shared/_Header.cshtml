@@ -14,14 +14,20 @@
                                     <li><a asp-controller="Home" asp-action="Index" class="trans hvr-underline-from-left">Home</a></li>
                                     <li><a asp-controller="Home" asp-action="About" class="trans">About</a></li>
                                     <li><a asp-controller="Home" asp-action="Menu" class="trans">Order</a></li>
-                                    <li><a asp-controller="Account" asp-action="Login" class="trans">Login</a></li>
+                                    @if (CurrentUser is null)
+                                    {
+                                        <li><a asp-controller="Account" asp-action="Login" class="trans">Login</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li><a asp-controller="Account" asp-action="Logout" class="trans">Logout</a></li>
+                                    }
                                     <li><a asp-controller="Account" asp-action="Login" class="trans">Register</a></li>
                                 </ul>
                             </div>
                             <div class="Cart">
-                                <a asp-controller="Cart" asp-action="Index" title="Cart">
-                                    <span class="Cart_count">Cart : (0) $00.00</span>
-                                    <!-- <i class="fa fa-shopping-cart" aria-hidden="true"></i> -->
+                                <a asp-area="" asp-controller="Cart" asp-action="Index" title="Cart">
+                                    <span class="Cart_count">Cart : (<span class="noti_Counter">@ViewBag.CartCout</span>) $00.00 </span>
                                     <img class="cart_img" src="~/asset/images/cart_1.png" alt="cart_1">
                                 </a>
                             </div>

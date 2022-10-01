@@ -14,12 +14,6 @@ namespace eFoodHub.UI.Controllers
         {
             _authService = authService;
         }
-
-        public IActionResult Register()
-        {
-            return View();
-        }
-
         public IActionResult Login()
         {
             return View();
@@ -35,11 +29,11 @@ namespace eFoodHub.UI.Controllers
                     Name = model.Name,
                     Email = model.EmailAddress,
                     UserName = model.EmailAddress,
-                    PhoneNumber = model.PhoneNumber
                 };
                 bool result = _authService.CreateUser(user, model.Password);
                 if (result)
                 {
+                    TempData["info"] = "Registration succesful, please proceed to login";
                     return RedirectToAction(nameof(Login));
                 }
                 return View();
@@ -47,10 +41,8 @@ namespace eFoodHub.UI.Controllers
             catch (Exception ex)
             {
                 ModelState.AddModelError("", ex.Message);
-                return View();
+                return View(nameof(Login));
             }
-
-
         }
 
         [HttpPost]
@@ -84,18 +76,15 @@ namespace eFoodHub.UI.Controllers
         public async Task<IActionResult> Logout()
         {
             await _authService.Signout();
-            return RedirectToAction("LogOutComplete");
+            return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult LogoutComplete()
-        {
-            return View();
-        }
 
         public IActionResult ForgotPassword()
         {
             return View();
         }
+
         public IActionResult RestPassword()
         {
             return View();
@@ -105,6 +94,5 @@ namespace eFoodHub.UI.Controllers
         {
             return View();
         }
-
     }
 }

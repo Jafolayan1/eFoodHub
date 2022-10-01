@@ -7,12 +7,6 @@ namespace eFoodHub.Repositories
 {
     public class ApplicationDbContext : IdentityDbContext<User, Role, int>
     {
-        //Needed if any migration
-        public ApplicationDbContext()
-        {
-        }
-
-        //Configuration from AppSettings
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }

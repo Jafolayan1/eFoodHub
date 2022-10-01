@@ -54,7 +54,7 @@ function updateQuantity(id, quantity) {
 }
 
 $(document).ready(function () {
-    var cookie = $.cookie('CId');
+    var cookie = Cookie.get('CId');
     if (cookie) {
         $.ajax({
             type: "GET",

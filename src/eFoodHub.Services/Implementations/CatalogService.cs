@@ -1,20 +1,23 @@
 ﻿using eFoodHub.Entities;
+using eFoodHub.Repositories;
 using eFoodHub.Repositories.Interfaces;
 using eFoodHub.Services.Interfaces;
 
 namespace eFoodHub.Services.Implementations
 {
-    public class CatalogService : ICatalogService
+    public class CatalogService : IDisposable, ICatalogService
     {
         private readonly IRepository<Item> _itemRepo;
         private readonly IRepository<Category> _categoryRepo;
         private readonly IRepository<ItemType> _itemTypeRepo;
+        private readonly ApplicationDbContext _context;
 
-        public CatalogService(IRepository<Item> itemRepo, IRepository<ItemType> itemTypeRepo, IRepository<Category> categoryRepo)
+        public CatalogService(IRepository<Item> itemRepo, IRepository<ItemType> itemTypeRepo, IRepository<Category> categoryRepo, ApplicationDbContext context)
         {
             _itemTypeRepo = itemTypeRepo;
             _itemRepo = itemRepo;
             _categoryRepo = categoryRepo;
+            _context = context;
         }
 
         public void AddItem(Item item)
@@ -27,6 +30,11 @@ namespace eFoodHub.Services.Implementations
         {
             _itemRepo.DeleteById(id);
             _itemRepo.SaveChanges();
+        }
+
+        public void Dispose()
+        {
+            _context.Dispose();
         }
 
         public IEnumerable<Category> GetCategories()

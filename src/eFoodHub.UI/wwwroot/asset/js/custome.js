@@ -12,14 +12,13 @@ $(document).ready(function(){
 		function myFunction() {
 		if (window.pageYOffset >= 1) {
 			navbar.classList.add("sticky")
-		} 
+		}
 		else {
 			navbar.classList.remove("sticky");
 		}
-		}     
-  
-/*========== Responsive Toggle ========= */  
+		}
 
+/*========== Responsive Toggle ========= */
 
   let burger = document.getElementById('burger'),
    nav    = document.getElementById('main-nav');
@@ -28,7 +27,6 @@ burger.addEventListener('click', function(e){
   this.classList.toggle('is-open');
   nav.classList.toggle('is-open');
 });
-
 
 // $(".nav_manu a.toggle_menu").click(function(){
 //    		 $(".Menu_list").toggleClass('active');
@@ -53,16 +51,14 @@ burger.addEventListener('click', function(e){
 		autoplay: true,
 		autoplayTimeout: 8000,
 	});
-	
+
 /*========== Testimonials Slider ========= */
 
-
 /*========== According  ========= */
- if($(window).width() < 768){ 
-		
+ if($(window).width() < 768){
  $(".M_footer .title").click(function() {
 		   if($(this).hasClass('fiaccDiv')){
-			   $(this).removeClass("fiaccDiv").next().slideUp();			  
+			   $(this).removeClass("fiaccDiv").next().slideUp();
 			   }
 		else
 		{
@@ -70,17 +66,15 @@ burger.addEventListener('click', function(e){
 			$(".main_cnt").slideUp();
 			$(this).addClass("fiaccDiv");
 			$(this).next().slideDown();
-			
-		}           
+		}
 		});
-
  }
- 
+
  /*========== According  ========= */
 
   /*========== login validation  ========= */
 
-  $(".loginbutton").click(function () {            
+  $(".loginbutton").click(function () {
 		var form = $("#loginform");
 			form.validate({
 			   //ignore: ":not(:visible)",
@@ -110,7 +104,7 @@ burger.addEventListener('click', function(e){
 		});
 
  /*========== New Account validation  ========= */
-  $(".register-btn").click(function () {            
+  $(".register-btn").click(function () {
 		var form = $("#registrationform");
 			form.validate({
 			   //ignore: ":not(:visible)",
@@ -121,10 +115,8 @@ burger.addEventListener('click', function(e){
 						required: true,
 						email: true
 					},
-				   
 				},
 				messages: {
-				
 				  registeremail: {
 					  required: "Please enter your email address",
 					  email: "Please enter a valid email address"
@@ -133,7 +125,7 @@ burger.addEventListener('click', function(e){
 			});
 		});
  /*========== New Account validation  ========= */
-   $(".subscribebutton").click(function () {            
+   $(".subscribebutton").click(function () {
 		var form = $("#subscribeform");
 			form.validate({
 			   //ignore: ":not(:visible)",
@@ -144,10 +136,8 @@ burger.addEventListener('click', function(e){
 						required: true,
 						email: true
 					},
-				   
 				},
 				messages: {
-				
 				  subscribeemail: {
 					  required: "Please enter your email address",
 					  email: "Please enter a valid email address"
@@ -156,7 +146,7 @@ burger.addEventListener('click', function(e){
 			});
 		});
 	/*========== New Account validation  ========= */
-	 $(".checkout-btn").click(function () {            
+	 $(".checkout-btn").click(function () {
 		var form = $("#checkoutform");
 			form.validate({
 			   //ignore: ":not(:visible)",
@@ -187,12 +177,11 @@ burger.addEventListener('click', function(e){
 					town: {
 						required:true,
 					  },
-				   
 				},
 				messages: {
 				   firstname: "Please enter your first name",
 				   lastname: "Please Enter your last name",
-				
+
 				  checkoutemail: {
 					  required: "Please enter your email address",
 					  email: "Please enter a valid email address"
@@ -201,19 +190,18 @@ burger.addEventListener('click', function(e){
 						required: "Please enter your contact number",
 						number: "enter number"
 					  },
-				   address: "Please Enter your address",  
+				   address: "Please Enter your address",
 
 				  postcode: {
 						required: "Please enter Post Code",
 						number: "enter valid code"
 					 },
-					town: "Please Enter your town",  
+					town: "Please Enter your town",
 				}
-
 			});
 		});
 	  /*========== New Account validation  ========= */
-	  $(".contactus-btn").click(function () {            
+	  $(".contactus-btn").click(function () {
 		var form = $("#contactusform");
 			form.validate({
 			   //ignore: ":not(:visible)",
@@ -232,7 +220,6 @@ burger.addEventListener('click', function(e){
 					message: {
 						required: true,
 					},
-				   
 				},
 				messages: {
 				   fname: "Please Enter your first name",
@@ -240,11 +227,10 @@ burger.addEventListener('click', function(e){
 				   subject: "Please Enter your subject",
 				   message: "Please Enter your message",
 				}
-
 			});
 		});
 	/*========== New Account validation  ========= */
-		 $(".coupon-btn").click(function () {            
+		 $(".coupon-btn").click(function () {
 		var form = $("#couponform");
 			form.validate({
 			   //ignore: ":not(:visible)",
@@ -254,17 +240,15 @@ burger.addEventListener('click', function(e){
 					Coupancode: {
 						required: true,
 					},
-				   
 				},
 				messages: {
 				   Coupancode: "Please enter your Coupan code ",
 				}
-
 			});
 		});
 });
 /*========== submit complaint validation  ========= */
-	  $(".submitcomplaintbtn").click(function () {            
+	  $(".submitcomplaintbtn").click(function () {
 		var form = $("#submitcomplaint");
 			form.validate({
 			   //ignore: ":not(:visible)",
@@ -280,19 +264,17 @@ burger.addEventListener('click', function(e){
 					problem: {
 						required: true,
 					},
-				   
 				},
 				messages: {
 				   bookingid: "Please Enter your booking id",
 				   subject: "Please Enter subject",
 				   problem: "Please Enter your problem",
 				}
-
 			});
 		});
 
 /*========== Personal Information validation  ========= */
-	  $(".PersonalInfoBtn").click(function () {            
+	  $(".PersonalInfoBtn").click(function () {
 		var form = $("#userpersonalinfo");
 			form.validate({
 			   //ignore: ":not(:visible)",
@@ -327,7 +309,6 @@ burger.addEventListener('click', function(e){
 					state: {
 						required: true,
 					},
-				   
 				},
 				messages: {
 				   bookingid: "Please Enter your booking id",
@@ -346,12 +327,11 @@ burger.addEventListener('click', function(e){
 					country: "Please Enter your country name",
 					state: "Please Enter your state name",
 				}
-
 			});
 		});
 
 	/*========== user change password validation  ========= */
-	  $(".changepasswordbtn").click(function () {            
+	  $(".changepasswordbtn").click(function () {
 		var form = $("#changepasswordbody");
 			form.validate({
 			   //ignore: ":not(:visible)",
@@ -368,7 +348,6 @@ burger.addEventListener('click', function(e){
 						required: true,
 						equalTo: "#newpassword",
 					},
-				   
 				},
 				messages: {
 				   oldpassword: "Please Enter your old password",
@@ -378,12 +357,11 @@ burger.addEventListener('click', function(e){
 					  equalTo: "password must be same",
 				  },
 				}
-
 			});
 		});
-  
+
    /*========== billing shiping address validation  ========= */
-	  $(".BillingAddbtn").click(function () {            
+	  $(".BillingAddbtn").click(function () {
 		var form = $("#BillingAdd");
 			form.validate({
 			   //ignore: ":not(:visible)",
@@ -400,7 +378,6 @@ burger.addEventListener('click', function(e){
 					password: {
 						required: true,
 					},
-				   
 				},
 				messages: {
 				   address: "Please Enter your address",
@@ -412,11 +389,10 @@ burger.addEventListener('click', function(e){
 					  required: "Please Enter your new password again",
 				  },
 				}
-
 			});
 		});
-  
-	$(".ShippingAddbtn").click(function () {            
+
+	$(".ShippingAddbtn").click(function () {
 		var form = $("#ShippingAdd");
 			form.validate({
 			   //ignore: ":not(:visible)",
@@ -433,7 +409,6 @@ burger.addEventListener('click', function(e){
 					password: {
 						required: true,
 					},
-				   
 				},
 				messages: {
 				   address: "Please Enter your address",
@@ -444,15 +419,12 @@ burger.addEventListener('click', function(e){
 				   password: {
 					  required: "Please Enter your new password again",
 				  },
-
 				}
-
 			});
 		});
 
-
 	 /*========== Add New Card validation  ========= */
-	  $(".AddNewCardbtn").click(function () {            
+	  $(".AddNewCardbtn").click(function () {
 		var form = $("#AddNewCard");
 			form.validate({
 			   //ignore: ":not(:visible)",
@@ -482,17 +454,13 @@ burger.addEventListener('click', function(e){
 				  validyear: "Please Enter valid year",
 				  cvv: "Please Enter your cvv number",
 				}
-
 			});
 		});
-
 
 /*========== TypeWriter  ========= */
 
 (function ( $ ) {
- 
 	$.fn.typewriter = function( options ) {
-
 		var settings = $.extend({
 			text: $(this).attr("tw-text"),
 			delay: 150,
@@ -531,21 +499,15 @@ burger.addEventListener('click', function(e){
 
 		//Call our function for the first time.
 		setTimeout( startType, settings.waitingTime );
-		
 	};
- 
 }( jQuery ));
 
-
-
 	  $(document).ready(function(){
-		
 		$("#typewriter_num").typewriter({
 			text: "01 234 567 890",
 			delay: 100,
 			waitingTime: 1000,
 			hide: false,
 			cursor: false,
-			
 		});
 	});

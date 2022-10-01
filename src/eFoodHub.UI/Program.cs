@@ -1,6 +1,10 @@
+using eFoodHub.Entities;
+using eFoodHub.Repositories;
 using eFoodHub.Services.Configuration;
 using eFoodHub.Services.Models;
 using eFoodHub.UI.Configuration;
+
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,11 +17,35 @@ if (builder.Environment.IsDevelopment())
 builder.Services.ConfigureRepositoryServices(builder.Configuration);
 builder.Services.ConfigureDependenciesServices();
 
-
-//Configures accessing razor pay from appsettings
-builder.Services.Configure<RazorPayConfig>(builder.Configuration.GetSection("RazorPayConfig"));
+builder.Services.Configure<PayStackConfig>(builder.Configuration.GetSection("PayStackConfig"));
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var ctx = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    var userMgr = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
+
+    ctx.Database.EnsureCreated();
+    var email = "admin@food.com";
+    var phone = "090909008744";
+
+    if (!ctx.Users.Any(u => u.Email == email))
+    {
+        var adminUser = new User
+        {
+            Name = "Admininistrator",
+            PhoneNumber = phone,
+            Email = email,
+            NormalizedEmail = email.ToUpper(),
+            UserName = email,
+            NormalizedUserName = email,
+            SecurityStamp = Guid.NewGuid().ToString(),
+        };
+        var result = userMgr.CreateAsync(adminUser, "Password").GetAwaiter().GetResult();
+        userMgr.AddToRoleAsync(adminUser, "Admin").GetAwaiter().GetResult();
+    }
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

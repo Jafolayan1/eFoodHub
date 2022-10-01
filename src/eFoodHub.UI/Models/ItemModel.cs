@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using eFoodHub.Entities;
+
+using System.ComponentModel.DataAnnotations;
 
 namespace eFoodHub.UI.Models
 {
@@ -16,6 +18,9 @@ namespace eFoodHub.UI.Models
 
         [Required(ErrorMessage = "Please Enter UnitPrice")]
         public decimal UnitPrice { get; set; }
+
+        public bool IsPopular { get; set; }
+        public Size Size { get; set; }
 
         public string? ImageUrl { get; set; }
 

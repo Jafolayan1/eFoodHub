@@ -9,6 +9,8 @@ INSERT [dbo].[Categories] ([CategoryId], [Name], [Description]) VALUES (3, N'Pas
 GO
 INSERT [dbo].[Categories] ([CategoryId], [Name], [Description]) VALUES (4, N'Fries', N'Fries')
 GO
+INSERT [dbo].[Categories] ([CategoryId], [Name], [Description]) VALUES (5, N'Salad', N'Salad')
+GO
 SET IDENTITY_INSERT [dbo].[Categories] OFF
 
 ------------------------------------------
@@ -21,10 +23,3 @@ INSERT [dbo].[ItemTypes] (ItemTypeId, [Name]) VALUES (2, N'NonVeg')
 GO
 SET IDENTITY_INSERT [dbo].[ItemTypes] OFF
 ------------------------------------------
-SET IDENTITY_INSERT [dbo].[AspNetRoles] ON 
-GO
-INSERT [dbo].[AspNetRoles] ([Id], [Name], [NormalizedName], [ConcurrencyStamp]) VALUES (1, N'Admin', N'ADMIN', N'979797')
-GO
-INSERT [dbo].[AspNetRoles] ([Id], [Name], [NormalizedName], [ConcurrencyStamp]) VALUES (2, N'User', N'USER', N'979799')
-GO
-SET IDENTITY_INSERT [dbo].[AspNetRoles] OFF

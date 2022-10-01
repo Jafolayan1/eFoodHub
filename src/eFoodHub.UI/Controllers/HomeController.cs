@@ -27,7 +27,6 @@ namespace eFoodHub.UI.Controllers
             return View();
         }
 
-
         public IActionResult Menu()
         {
             return View();

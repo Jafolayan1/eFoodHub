@@ -3,6 +3,8 @@ using eFoodHub.Services.Interfaces;
 using eFoodHub.UI.Helpers;
 using eFoodHub.UI.Interfaces;
 
+using ePizzaHub.Services.Implementations;
+
 namespace eFoodHub.UI.Configuration
 {
     /// <summary>
@@ -19,10 +21,9 @@ namespace eFoodHub.UI.Configuration
             services.AddTransient<ICatalogService, CatalogService>();
             services.AddTransient<ICartService, CartService>();
             services.AddTransient<IOrderService, OrderService>();
+            services.AddTransient<IPaymentService, PaymentService>();
 
             services.AddTransient<IFileHelper, FileHelper>();
-
-            services.AddTransient<IRazorpayPaymentService, RazorpayPaymentService>();
         }
     }
 }
