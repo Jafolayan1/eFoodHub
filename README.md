@@ -6,13 +6,12 @@ Food delivery web application project, built using .NET 5 MVC.
 
 
 
-## Features of MVC Client
+## Features
 1. CRUD operation
 2. Repository Pattern
 3. Areas
 4. Identity
 5. Viewcomponents
-6.
 
 # Installation
 ## VISUAL STUDIO
@@ -24,7 +23,7 @@ add-migration <migrationname>
 
 update-database
 ```
-. SeedData
+4. SeedData
 5. Build project.
 6. Run project.
 
