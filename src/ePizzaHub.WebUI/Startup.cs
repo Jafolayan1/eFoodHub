@@ -32,8 +32,8 @@ namespace ePizzaHub.WebUI
                 builder.AddRazorRuntimeCompilation();
             }
 #endif
+            builder.Services.Configure<PaystackConfig>(Configuration.GetSection("PayStackConfig"));
 
-            services.Configure<RazorPayConfig>(Configuration.GetSection("RazorPayConfig"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

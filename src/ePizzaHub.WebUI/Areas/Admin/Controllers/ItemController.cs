@@ -2,11 +2,10 @@
 using ePizzaHub.Services.Interfaces;
 using ePizzaHub.WebUI.Interfaces;
 using ePizzaHub.WebUI.Models;
+
 using Microsoft.AspNetCore.Mvc;
+
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ePizzaHub.WebUI.Areas.Admin.Controllers
 {
@@ -103,7 +102,7 @@ namespace ePizzaHub.WebUI.Areas.Admin.Controllers
                 _catalogService.UpdateItem(data);
                 return RedirectToAction("Index");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }

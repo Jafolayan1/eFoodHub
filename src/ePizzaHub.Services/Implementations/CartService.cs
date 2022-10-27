@@ -2,11 +2,9 @@
 using ePizzaHub.Repositories.Interfaces;
 using ePizzaHub.Repositories.Models;
 using ePizzaHub.Services.Interfaces;
+
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ePizzaHub.Services.Implementations
 {
@@ -59,7 +57,7 @@ namespace ePizzaHub.Services.Implementations
                 }
                 return cart;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return null;
             }
